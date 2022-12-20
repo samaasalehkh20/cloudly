@@ -19,7 +19,7 @@
                                 <div class="card-body p-0">
                                     <div class="card-p mb-10">
                                         <div class="text-center px-4">
-                                            <img class="mw-100 mh-300px card-rounded-bottom" alt="" src="{{ asset('storage') . '/' . $image->image }}" />
+                                            <img class="mw-100 mh-300px card-rounded-bottom" alt="" src="{{ $image->image }}" />
                                         </div>
                                     </div>
                                 </div>
@@ -40,7 +40,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <img class="mw-100 mh-300px card-rounded-bottom" alt="" src="{{ asset('storage') . '/' . $image->image }}" />
+                                    <img class="mw-100 mh-300px card-rounded-bottom" alt="" src="{{ $image->image }}" />
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>

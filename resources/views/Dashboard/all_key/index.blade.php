@@ -59,12 +59,12 @@
                             @php
                                 $i = 1;
                             @endphp
-                            @foreach( $images as $key => $value )
+                            @foreach( $images as $value )
                                 <tr>
                                     <th scope="row">{{ $i++ }}</th>
-                                    <td>{{ $key }}</td>
+                                    <td>{{ $value->key }}</td>
                                     <td>
-                                        <img src="{{ asset('storage') . '/' . $value }}" width="80" height="80" style="border-radius: 50%">
+                                        <img src="{{ $value->image }}" width="80" height="80" style="border-radius: 50%">
                                     </td>
                                 </tr>
                             @endforeach

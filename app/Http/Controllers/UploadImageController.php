@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cache;
 use \Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Storage;
 
 class UploadImageController extends Controller
 {
@@ -49,7 +50,7 @@ class UploadImageController extends Controller
             $file = $request->file('image');
 
             $image_path = $file->store('images', [
-                'disk' => 'public'
+                 'disk' => 's3',
             ]);
         }
 
@@ -78,7 +79,7 @@ class UploadImageController extends Controller
 
         Image::create([
            'key' => $request->key,
-           'image' => $image_path,
+           'image' => Storage::disk('s3')->url($image_path),
            'title' => $request->title,
            'created_at' => null,
            'updated_at' => null,
@@ -159,20 +160,20 @@ class UploadImageController extends Controller
 
     public function getRecent(Request $request)
     {
-        if (config('images')) {
-            foreach ( config('images') as $key => $value ) {
-                if ( $key == $request->key ) {
+//        if (config('images')) {
+//            foreach ( config('images') as $key => $value ) {
+//                if ( $key == $request->key ) {
+//
+//                    config(['images.'.$request->key => $value]);
+//
+//                    $fp = fopen(base_path() .'/config/images.php' , 'w');
+//                    fwrite($fp, '<?php return ' . var_export(config('images'), true) . ';');
+//                    fclose($fp);
+//                }
+//            }
+//        }
 
-                    config(['images.'.$request->key => $value]);
-
-                    $fp = fopen(base_path() .'/config/images.php' , 'w');
-                    fwrite($fp, '<?php return ' . var_export(config('images'), true) . ';');
-                    fclose($fp);
-                }
-            }
-        }
-
-        $image = Image::where('key', $request->key)->first();
+        $image = Image::where('id', $request->id)->first();
 
         $image->update([
             'updated_at' => now(),

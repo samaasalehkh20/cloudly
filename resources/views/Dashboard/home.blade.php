@@ -7,19 +7,19 @@
     <div class="container">
         <div class="row">
             @if ( $images )
-                @foreach( $images as $key => $value )
+                @foreach( $images as $value )
                         <div class="col-md-4 mb-4" >
-                            <a type="button" style="text-decoration: none; color: #0c0e1a" data-key="{{ $key }}" class="getRecent" data-toggle="modal" data-target="#exampleModal-{{ $key }}" >
+                            <a type="button" style="text-decoration: none; color: #0c0e1a" class="getRecent" data-id="{{ $value->id }}" data-toggle="modal" data-target="#exampleModal-{{ $value->id }}" >
                                 <div class="card shadow-sm">
                                     <div class="card-header" style="height: 65px; margin-bottom: 20px;">
                                         <h3 class="card-title">
-                                            {{ $key }}
+                                            {{ $value->key }}
                                         </h3>
                                     </div>
                                     <div class="card-body p-0">
                                         <div class="card-p mb-10">
                                             <div class="text-center px-4">
-                                                <img class="mw-100 mh-300px card-rounded-bottom" alt="" src="{{ asset('storage') . '/' . $value }}" />
+                                                <img class="mw-100 mh-300px card-rounded-bottom" alt="" src="{{ $value->image }}" />
                                             </div>
                                         </div>
                                     </div>
@@ -28,19 +28,19 @@
                         </div>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="exampleModal-{{ $key }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="exampleModal-{{ $value->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">
-                                        {{ $key }}
+                                        {{ $value->key }}
                                     </h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <i aria-hidden="true" class="ki ki-close"></i>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <img class="mw-100 mh-300px card-rounded-bottom" alt="" src="{{ asset('storage') . '/' . $value }}" />
+                                    <img class="mw-100 mh-300px card-rounded-bottom" alt="" src="{{ $value->image }}" />
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
@@ -69,13 +69,13 @@
             e.preventDefault();
             // alert()
 
-            key = $(this).data('key')
+            id = $(this).data('id')
 
             $.ajax({
                url: '{{ route('upload_image.getRecent') }}',
                type: 'get',
                data: {
-                   key: key,
+                   id: id,
                },
                success: function (data) {
                    console.log('Done');

@@ -16,16 +16,18 @@ class AllKeysController extends Controller
      */
     public function index()
     {
-        $images = [];
-        $keys = config('images');
+//        $images = [];
+//        $keys = config('images');
+//
+//        if( $keys ) {
+//            foreach ( $keys as $key => $value ) {
+//                if( $key != "hit" && $key != "miss" && $key != "size") {
+//                    $images[$key] = $value;
+//                }
+//            }
+//        }
+        $images = Image::query()->get();
 
-        if( $keys ) {
-            foreach ( $keys as $key => $value ) {
-                if( $key != "hit" && $key != "miss" && $key != "size") {
-                    $images[$key] = $value;
-                }
-            }
-        }
         return view('Dashboard.all_key.index', compact('images'));
     }
 
