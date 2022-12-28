@@ -13,7 +13,7 @@ class SearchController extends Controller
         if ( config('images') ) {
             foreach ( config('images') as $key => $value ) {
                 if ( $key == $request->key ) {
-//
+
 //                    $current_time = Carbon::now();
 //                    $after_min = $current_time->addMinute();
 //
